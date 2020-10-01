@@ -1,21 +1,21 @@
-// Aim :- Implement Queue Data Structure using Array
+// Aim :- Implement Circular Queue Data Structure using Array
 
 // Input:- enqueue,dequeue operations
-// Output:- queue after operations
-// Data Structure used :- Queue (Array in FIFO) pointed by FRONT and REAR
+// Output:- circular queue after operations
+// Data Structure used :- Circular Queue (Array in FIFO) pointed by FRONT and REAR
 
 // Start
 // 1. Take a array of size N QUEUE[N]
 // 2. Initialize FRONT = -1 and REAR = -1
 // 3. enqueue(ITEM)
-// 4.     if(N-1==REAR)
+// 4.     if(FRONT==(REAR+1)%N)
 // 5.          print "QUEUE OVERFLOW"
 // 6.
 // 7.     else if(FRONT == -1 && REAR == -1)
 // 8.          FRONT=REAR=0
 // 9.          QUEUE[REAR] = ITEM
 // 10.    else
-// 11.         REAR = REAR + 1
+// 11.         REAR = (REAR + 1) %N
 // 12.         QUEUE[REAR] = ITEM
 // 13. dequeue()
 // 14.     if(FRONT == -1)
@@ -24,7 +24,7 @@
 // 17.     else if(FRONT == REAR)
 // 18.          FRONT=REAR=-1
 // 19.     else
-// 20.          FRONT = FRONT + 1
+// 20.          FRONT = (FRONT + 1)%N
 // 21.     return ITEM
 // Stop
 //
@@ -43,11 +43,8 @@
 // Space Complexity
 // Worst Case :- O(1)
 
-
 #include <stdio.h>
 #include <stdlib.h>
-
-#define loop(j,n) for (int i = j; i < n; i++)
 
 struct queue{
   int front;
@@ -57,7 +54,7 @@ struct queue{
 };
 
 int isFull(struct queue *d){
-  if(d->max_size-1 == d->rear){
+  if(d->front == (d->rear+1)%d->max_size){
     return 1;
   }
   return 0;
@@ -84,7 +81,7 @@ void enqueue(struct queue *d,int item){
   if(d->front == -1 && d->rear == -1){
     d->front = d->rear = 0;
   }else{
-    d->rear++;
+    d->rear = (d->rear+1)%d->max_size;
   }
   d->queue[d->rear]=item;
 }
@@ -98,7 +95,7 @@ int dequeue(struct queue *d){
   if(d->front==d->rear){
     d->front=d->rear=-1;
   }else{
-    d->front++;
+    d->front = (d->front+1)%d->max_size;
   }
   return item;
 }
@@ -106,18 +103,44 @@ int dequeue(struct queue *d){
 void printqueue(struct queue *d){
   printf("\n");
   printf("Front :- %d Rear :- %d\n",d->front,d->rear);
-  loop(d->front,d->rear)
+  if(isEmpty(d)){
+    printf("%s\n","Empty Queue");
+    return;
+  }
+  int i = d->front;
+  while(i!=d->rear){
     printf("%d ",*(d->queue + i));
-  printf("\n");
+    i = (i+1)%d->max_size;
+  }
+  printf("%d\n",*(d->queue+d->rear));
 }
 
 
 int main(){
-  struct queue que_array;
-  create_queue(&que_array);
-  enqueue(&que_array,20);
-  printqueue(&que_array);
-  dequeue(&que_array);
-  printqueue(&que_array);
+  struct queue circular_array;
+  create_queue(&circular_array);
+  printqueue(&circular_array);
+  enqueue(&circular_array,12);
+  printqueue(&circular_array);
+  enqueue(&circular_array,13);
+  printqueue(&circular_array);
+  enqueue(&circular_array,14);
+  printqueue(&circular_array);
+  enqueue(&circular_array,15);
+  printqueue(&circular_array);
+  enqueue(&circular_array,16);
+  printqueue(&circular_array);
+  enqueue(&circular_array,16);
+  printqueue(&circular_array);
+  dequeue(&circular_array);
+  printqueue(&circular_array);
+  dequeue(&circular_array);
+  printqueue(&circular_array);
+  dequeue(&circular_array);
+  printqueue(&circular_array);
+  enqueue(&circular_array,16);
+  printqueue(&circular_array);
+  enqueue(&circular_array,16);
+  printqueue(&circular_array);
   return 0;
 }
