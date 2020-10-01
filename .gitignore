@@ -1,6 +1,7 @@
 .idea
-cmake-build-dubug
 *.exe
+CMakeLists.txt
+main.c
 
 # Project exclude paths
 /cmake-build-debug/
