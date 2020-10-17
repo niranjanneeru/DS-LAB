@@ -66,6 +66,7 @@ void insertion_sort(int *p, int n) {
             swap++;
         }
         p[j + 1] = temp;
+        print_array(p,n);
     }
     printf("Iteration: %d\nSwaps: %d\n", iter, swap);
 }

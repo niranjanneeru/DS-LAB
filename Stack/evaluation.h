@@ -1,42 +1,30 @@
-// Aim :- Infix to PostFix
-// Input: Proper(Balanced Without any paranthesis Issue) Arithmatic Expression as String (Infix Notation) and STACK with '(' in top position
-// Table defined with In Stack Priority and In Comming Priority
-// Output : Arithmatic Expression as String (PostFix Notation)
+// Aim :- PostFix Evaluation
+// Input: PostFix Expression with # at the end
+// Output : Result evaluates
 // Data Structure :- Stack (Array in LIFO) with top pointed in the top
 
 // Start
-// 1.Initialize TOP = -1,PUSH('(')
+// 1.Initialize STACK, TOP = -1
 // 2.while(TOP>-1)do
 // 3. item = E.Readsymbol()
-// 4. x = POP()
-// 5. Case item = operand
-//     a. PUSH(x)
-//     b. output(item)
-// 6. Case item = ')'
-//      a. while x!= '('
-//      b.    output(x)
-//      c.    x = POP()
-// 7. Case item = operator
-// 8. Case ISP(x) >= ICP(item)
-// 9.       while(ISP(x) >= ICP(item))do
-// 10.           output(x)
-// 11.           x = POP()
-// 12.      endwhile
-// 13.      PUSH(x)
-// 14.      PUSH(item)
-// 15.Case ISP(x) < ICP(item)
-// 16.      PUSH(x)
-// 17.      PUSH(item)
-// 18. Otherwise
-// 19.    print("Invalid")
-
+// 4. Case item = operand
+//     a. PUSH(item)
+// 5. Case item = operator
+//          x2 = POP()
+//          x1 = POP()
+//          x = x1(item)x2
+//          PUSH(x)
+// 6. Case item = #
+//          x = POP()
+//          Output(x)
+// 7. Otherwise
+// 8.    print("Invalid")
+// Stop
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <math.h>
 # include <string.h>
-
-# define MAX 100
+# include <math.h>
 
 struct stack {
     int size;
@@ -45,7 +33,7 @@ struct stack {
 };
 
 int isFull(struct stack *st) {
-    if (st->top >= MAX - 1) {
+    if (st->top >= st->size - 1) {
         return 1;
     } else {
         return 0;
@@ -99,7 +87,8 @@ void create(struct stack *st) {
 }
 
 int isOperand(char input) {
-    if ((input >= '0' && input <= '9')) {
+//    if( (input>='A' && input <= 'Z') || (input>='0' && input <= '9') ){
+    if (input >= '0' && input <= '9') {
         return 1;
     }
     return 0;
@@ -151,7 +140,7 @@ char *postfix(struct stack *st, char *p) {
     int k = 0;
     int i = 0;
     while (!(isEmpty(st)) && i < (int) strlen(p)) {
-//        display(result, k);
+//        display(result,k);      // Steps
 //        printStack(st);
         char item = p[i];
         i++;
@@ -188,64 +177,3 @@ void dealloc(char *c) {
     free(c);
 }
 
-int perform_calc(int x1, int x2, char item) {
-    switch (item) {
-        case '+':
-            return x1 + x2;
-        case '-':
-            return x1 - x2;
-        case '*':
-            return x1 * x2;
-        case '/':
-            return x1 / x2;
-        case '^':
-            return pow(x1, x2);
-    }
-}
-
-int evaluate_postfix(char *p) {
-    struct stack stack_array;
-    stack_array.size = strlen(p);
-    create(&stack_array);
-    int iter = 0;
-    push(&stack_array, '#');
-    while (!(isEmpty(&stack_array))) {
-        char item = p[iter];
-        iter++;
-        if (isOperand(item)) {
-            push(&stack_array, item);
-        } else if (isOperator(item)) {
-            int x2 = pop(&stack_array) - '0';
-            int x1 = pop(&stack_array) - '0';
-            push(&stack_array, perform_calc(x1, x2, item) + '0');
-        } else if (item == '#') {
-            int x = pop(&stack_array) - '0';
-            pop(&stack_array);
-            dealloc(stack_array.arr);
-            return x;
-        } else {
-            printf("%s\n", "Invalid Expression");
-            return -2;
-        }
-    }
-    return -1;
-}
-
-int main() {
-    struct stack stack_array;
-    char *result;
-    char input[MAX];
-    printf("Enter the Expression in Infix Form: ");
-    scanf("%s", input);
-    input[strlen(input)] = ')';
-    stack_array.size = strlen(input);
-    create(&stack_array);
-    push(&stack_array, '(');
-    result = postfix(&stack_array, input);
-    printf("Expression in PostFix Form: %s\n", result);
-    result[strlen(result)] = '#';
-    printf("%d", evaluate_postfix(result));
-    dealloc(result);
-    dealloc(stack_array.arr);
-    return 0;
-}
