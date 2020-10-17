@@ -7,6 +7,20 @@ struct stack_char {
     char *arr;
 };
 
+void createChar(struct stack_char *st, int size) {
+    st->size = size;
+    st->arr = (char *) malloc((st->size) * sizeof(char));
+    st->top = -1;
+}
+
+void printStackChar(struct stack_char *st) {
+    printf("Stack  : ");
+    for (int i = 0; i <= st->top; ++i) {
+        printf("%c ", st->arr[i]);
+    }
+    printf("\n");
+}
+
 int isFullChar(struct stack_char *st) {
     if (st->top >= st->size - 1) {
         return 1;
@@ -38,19 +52,4 @@ char popChar(struct stack_char *st) {
     } else {
         return st->arr[st->top--];
     }
-}
-
-
-void printStackChar(struct stack_char *st) {
-    printf("Stack  : ");
-    for (int i = 0; i <= st->top; ++i) {
-        printf("%c ", st->arr[i]);
-    }
-    printf("\n");
-}
-
-void createChar(struct stack_char *st, int size) {
-    st->size = size;
-    st->arr = (char *) malloc((st->size) * sizeof(char));
-    st->top = -1;
 }
