@@ -37,12 +37,9 @@ int evaluate_postfix(char *p) {
     struct stack_int stack_array;
     create(&stack_array, strlen(p));
     int iter = 0;
-    //todo
-    push(&stack_array, -1);
-    while (!(isEmpty(&stack_array))) {
+    while (!(isEmpty(&stack_array)) || iter < (int) strlen(p)) {
         char item = p[iter];
         iter++;
-//        printStack(&stack_array);
         if (isOperandEval(item)) {
             push(&stack_array, item - '0');
         } else if (isOperatorEval(item)) {
@@ -50,10 +47,7 @@ int evaluate_postfix(char *p) {
             int x1 = pop(&stack_array);
             push(&stack_array, perform_calc(x1, x2, item));
         } else if (item == '#') {
-            int x = pop(&stack_array);
-            pop(&stack_array);
-            free(stack_array.arr);
-            return x;
+            return pop(&stack_array);
         } else {
             printf("%s\n", "Invalid Expression (not in postfix form or may contain alphabets)");
             return -1;
