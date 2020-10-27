@@ -96,5 +96,6 @@ char *postfix(char *p) {
         }
     }
     free(st->arr);
+    result[k] = '\0';
     return result;
 }
