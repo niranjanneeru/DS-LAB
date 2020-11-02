@@ -27,7 +27,7 @@
 // 20.          FRONT = (FRONT + 1)%N
 // 21.     return ITEM
 // Stop
-//
+
 
 // Time Complexity
 // enqueue(ITEM)
@@ -119,28 +119,29 @@ void printqueue(struct queue *d){
 int main(){
   struct queue circular_array;
   create_queue(&circular_array);
-  printqueue(&circular_array);
-  enqueue(&circular_array,12);
-  printqueue(&circular_array);
-  enqueue(&circular_array,13);
-  printqueue(&circular_array);
-  enqueue(&circular_array,14);
-  printqueue(&circular_array);
-  enqueue(&circular_array,15);
-  printqueue(&circular_array);
-  enqueue(&circular_array,16);
-  printqueue(&circular_array);
-  enqueue(&circular_array,16);
-  printqueue(&circular_array);
-  dequeue(&circular_array);
-  printqueue(&circular_array);
-  dequeue(&circular_array);
-  printqueue(&circular_array);
-  dequeue(&circular_array);
-  printqueue(&circular_array);
-  enqueue(&circular_array,16);
-  printqueue(&circular_array);
-  enqueue(&circular_array,16);
-  printqueue(&circular_array);
-  return 0;
+    int choose;
+    int val;
+    start:
+    printf("Choose\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit \n: ");
+    scanf("%d", &choose);
+    switch (choose) {
+        case 1:
+            printf("Enter the value to enqueue: ");
+            scanf("%d", &val);
+            enqueue(&circular_array, val);
+            goto start;
+        case 2:
+            val = dequeue(&circular_array);
+            if (val != NULL) {
+                printf("Extracted Value : %d\n", val);
+            }
+            goto start;
+        case 3:
+            printqueue(&circular_array);
+            goto start;
+        default:
+            printf("Exiting...");
+            break;
+    }
+    return 0;
 }
