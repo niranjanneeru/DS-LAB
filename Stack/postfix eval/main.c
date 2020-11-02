@@ -1,95 +1,128 @@
 #include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<math.h>
-
-struct queue
+#include<ctype.h>
+#include <math.h>
+char stack[20];
+int top=-1;
+int stack1[20];
+int top1 = -1;
+void push1(int x)
 {
-    int item;
-    int front;
-    int rear;
-    int size;
-    int *a;
-};
-
-void create_queue(struct queue *q)
+    stack1[++top1] = x;
+}
+int pop1()
 {
-    q->front=q->rear=-1;
-    printf("enter the size of queue\n");
-    scanf("%d",&q->size);
-    q->a=(int *)malloc(q->size*sizeof(int));
+    return stack1[top1--];
 }
 
-void insert_queue(struct queue *q,int b)
+void push(char x)
 {
-    if(q->rear>=q->size-1)
-        printf("queue is full\n");
-    else if(q->front==-1&&q->rear==-1)
-    {
-        q->front=q->rear=0;
-        q->a[q->rear]=b;
-    }
+    stack[++top]=x;
+}
+char pop()
+{
+    if (top==-1)
+        return -1;
     else
-    {
-        q->rear=q->rear+1;
-        q->a[q->rear]=b;
-    }
-
+        return stack[top--];
 }
-
-void delete_queue(struct queue *q)
-{
-    if(q->front==-1 && q->rear==-1)
-        printf("queue is empty\n");
-    else if(q->front==q->rear)
-    {
-        q->item=q->a[q->front];
-        q->front=q->rear=-1;
-    }
-    else
-    {
-        q->item=q->a[q->front];
-        q->front=q->front+1;
-    }
-
-}
-void display_queue(struct queue *q)
-{
-    int j=0;
-    for(int i=q->front;i<q->rear;i++)
-    {
-        printf("queue=%d with front=%d\n",q->a[i],q->front+j);
-        j++;
+int value(int x1, int x2, char item) {
+    switch (item) {
+        case '+':
+            return x1 + x2;
+        case '-':
+            return x1 - x2;
+        case '*':
+            return x1 * x2;
+        case '/':
+            return x1 / x2;
+        case '^':
+            return pow(x1, x2);
     }
 }
-
-void main()
+int priority(char x)
 {
-    struct queue q1;
-    int p,r,s;
-    create_queue(&q1);
-    A1:
-    printf("choose an option\n");
-    printf("1=insertion\n 2=deletion\n 3=print_queue\n");
-    scanf("%d",&p);
-    switch(p)
+    if(x=='(')
+        return 0;
+    if(x=='+'||x=='-')
+        return 1;
+    if(x=='*'||x=='/')
+        return 2;
+}
+int main()
+{
+    char out[20];
+    char exp[20];
+    char *e,x;
+    printf("Enter the Infix expression:");
+    scanf("%s",exp);
+    e=exp;
+    int c = 0;
+    while(*e!='\0')
     {
-        case 1:
-            printf("enter the element to be inserted\n");
-            scanf("%d",&r);
-            insert_queue(&q1,r);
-            goto A1;
-
-        case 2:
-            delete_queue(&q1);
-            goto A1;
-
-        case 3:
-            display_queue(&q1);
-            break;
-
-        default:
-            printf("invalid input\n");
+        if(isalnum(*e))
+            out[c++] = *e;
+        else if(*e=='(')
+            push(*e);
+        else if(*e==')')
+        {
+            while((x=pop())!='(')
+                out[c++] = x;
+        }
+        else
+        {
+            while((priority(stack[top]))>=(priority(*e)))
+                out[c++] = pop();
+            push(*e);
+        }
+        e++;
     }
-
+    while(top!=-1)
+    {
+        out[c++] = pop();
+    }
+    out[c] = '\0';
+    char *p;
+    int n1,n2,n3,num;
+    printf("The Postfix form of  expression : %s",out);
+    p = out;
+    while(*p != '\0')
+    {
+        if(isdigit(*p))
+        {
+            num = *p - 48;
+            push1(num);
+        }
+        else
+        {
+            n1 = pop1();
+            n2 = pop1();
+            switch(*p)
+            {
+                case '+':
+                {
+                    n3 = n1 + n2;
+                    break;
+                }
+                case '-':
+                {
+                    n3 = n2 - n1;
+                    break;
+                }
+                case '*':
+                {
+                    n3 = n1 * n2;
+                    break;
+                }
+                case '/':
+                {
+                    n3 = n2 / n1;
+                    break;
+                }
+            }
+            push1(n3);
+        }
+        p++;
+    }
+    printf("The result of expression %s  =  %d\n",out,pop1());
+    return 0;
 }

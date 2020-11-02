@@ -1,93 +1,104 @@
 //Queue using array
 
 #include<stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 
-#define MAX 10
-int *q, REAR = -1, FRONT = -1, el;
+#define loop(j, n) for (int i = j; i < n; i++)
 
-void DISPLAY(int *q) {
-    if (-1 == FRONT) {
-        printf("\n The Queue is Empty");
+struct queue {
+    int front;
+    int rear;
+    int max_size;
+    int *queue;
+};
 
-    } else {
-        printf("\n The Queue is: ");
-        for (int i = FRONT; i <= REAR; i++) {
-            printf("\n %d", q[i]);
-        }
+int isFull(struct queue *d) {
+    if (d->max_size - 1 == d->rear) {
+        return 1;
     }
-
+    return 0;
 }
 
-void ENQUEUE(int *q,int el) {
-    if (REAR == MAX - 1) {
-        printf("\n The Queue is Full");
-    } else {
-        if ((REAR == -1) && (FRONT == -1)) {
-            FRONT++;
-            REAR++;
-            q[REAR] = el;
-
-        } else {
-            REAR++;
-            q[REAR] = el;
-        }
-        printf("\n The element has entered the queue");
+int isEmpty(struct queue *d) {
+    if (-1 == d->front) {
+        return 1;
     }
+    return 0;
 }
 
-int DEQUEUE(int *q, int *FRONT, int *REAR) {
-    if (*FRONT == *REAR) {
-        printf("\n The Queue is empty");
-        return -1;
-    } else {
-        int rem = q[*REAR];
-        *FRONT = *FRONT + 1;
-        if (*FRONT == *REAR) {
-            *FRONT = -1;
-            *REAR = -1;
-        }
-        return rem;
-    }
+void create_queue(struct queue *d) {
+    printf("Enter the max size of the queue: ");
+    scanf("%d", &d->max_size);
+    d->front = d->rear = -1;
+    d->queue = (int *) malloc(d->max_size * sizeof(int));
 }
 
+void enqueue(struct queue *d, int item) {
+    if (isFull(d)) {
+        printf("Queue Overflow\n");
+        return;
+    }
+    if (d->front == -1 && d->rear == -1) {
+        d->front = d->rear = 0;
+    } else {
+        d->rear++;
+    }
+    d->queue[d->rear] = item;
+}
 
-void main() {
-    int c, rem;
-    q = (int *) malloc(MAX * sizeof(int));
-    while (1) {
-        printf("\n Enter the operation to be performed on the QUEUE");
-        printf("\n 1.ENQUEUE \n 2.DEQUEUE \n 3.DISPLAY \n 4.EXIT \n");
-        scanf("%d", &c);
-        if (c == 4) {
+int dequeue(struct queue *d) {
+
+    if (isEmpty(d)) {
+        printf("Queue UnderFlow\n");
+        return NULL;
+    }
+    int item = d->queue[d->front];
+    if (d->front == d->rear) {
+        d->front = d->rear = -1;
+    } else {
+        d->front++;
+    }
+    return item;
+}
+
+void printqueue(struct queue *d) {
+    printf("\n");
+    if (d->front == -1 && d->rear == -1) {
+        printf("Empty Queue\n");
+        return;
+    }
+    printf("Front :- %d Rear :- %d\n", d->front, d->rear);
+    printf("||:- ");
+    loop(d->front, d->rear + 1)printf("%d ", *(d->queue + i));
+    printf("\n");
+}
+
+int main() {
+    struct queue que_array;
+    create_queue(&que_array);
+    int choose;
+    int val;
+    start:
+    printf("Choose\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit \n: ");
+    scanf("%d", &choose);
+    switch (choose) {
+        case 1:
+            printf("Enter the value to enqueue: ");
+            scanf("%d", &val);
+            enqueue(&que_array, val);
+            goto start;
+        case 2:
+            val = dequeue(&que_array);
+            if (val != NULL) {
+                printf("Extracted Value : %d\n", val);
+            }
+            goto start;
+        case 3:
+            printqueue(&que_array);
+            goto start;
+        default:
+            printf("Exiting...");
             break;
-        }
-        switch (c) {
-            case 1: {
-                printf("\n Enter the element to be inserted into the Queue: ");
-                scanf("%d", &el);
-                ENQUEUE(q, el);
-                break;
-            }
-            case 2: {
-                printf("\n Removing element in the Queue: ");
-                rem = DEQUEUE(q, &FRONT, &REAR);
-                if (rem != -1) {
-                    printf("\n The removed element is: %d", rem);
-                    break;
-                }
-
-            }
-            case 3: {
-                DISPLAY(q);
-                break;
-            }
-            default: {
-                printf("\n Invalid Value");
-                break;
-            }
-
-        }
-
     }
+    return 0;
 }

@@ -30,14 +30,14 @@
 //
 
 // Time Complexity
-// enqueue(ITEM)
+// enqueueFront(ITEM) and enqueueRear(ITEM)
 // Worst Case :- O(1)
 
 // Space Complexity
 // Worst Case :- O(1)
 
 
-// dequeue()
+// dequeueFront() and dequeueRear()
 // Worst Case :- O(1)
 
 // Space Complexity
