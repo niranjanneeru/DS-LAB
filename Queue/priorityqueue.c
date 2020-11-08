@@ -53,10 +53,10 @@ int *dequeueHighestPriority(struct pqueue *p) {
         printf("Queue Underflow\n");
         return NULL;
     }
-    for (int i = p->front; i < p->rear + 1; ++i) {
+    for (int i = p->front + 1; i < p->rear + 1; ++i) {
         int j = i - 1;
         struct pq_element temp = p->arr[i];
-        while (j >= 0 && temp.priority < p->arr[j].priority) {
+        while (j >= p->front && temp.priority < p->arr[j].priority) {
             p->arr[j + 1] = p->arr[j];
             j--;
         }

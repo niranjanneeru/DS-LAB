@@ -12,9 +12,9 @@ void push(struct stack **top, int val) {
         printf("Memory Underflow\n");
         return;
     }
+    next->data = val;
     next->link = *top;
     *top = next;
-    next->data = val;
 }
 
 int pop(struct stack **top) {
