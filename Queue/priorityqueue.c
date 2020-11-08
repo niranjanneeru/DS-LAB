@@ -1,50 +1,3 @@
-// Aim :- Implement Priority Queue Data Structure using Array
-
-// Input:- enqueue,dequeueHighestPriority
-// Output:- deque after operations
-// Data Structure used :- Deque (Array in FIFO) pointed by FRONT and REAR
-//
-// Start
-// 1. Take a array of size N QUEUE[N]
-// 2. Initialize FRONT = -1 and REAR = -1
-//       ITEM has data and priority
-// 3. enqueue(ITEM)
-// 4.     if(N-1==REAR)
-// 5.          print "QUEUE OVERFLOW"
-// 6.
-// 7.     else if(FRONT == -1 && REAR == -1)
-// 8.          FRONT=REAR=0
-// 9.          QUEUE[REAR] = ITEM
-// 10.    else
-// 11.         REAR = REAR + 1
-// 12.         QUEUE[REAR] = ITEM
-// 13. dequeueHighestPriority()
-// 14.     if(FRONT == -1)
-// 15.          print "QUEUE UNDERFLOW"
-// 16.
-// 16.     ITEM = QUEUE[FRONT]
-// 17.     else if(FRONT == REAR)
-// 18.          FRONT=REAR=-1
-// 19.     else
-// 20.          FRONT = FRONT + 1
-// 21.     return ITEM
-// Stop
-
-
-// Time Complexity
-// enqueue(ITEM)
-// Worst Case :- O(1)
-
-// Space Complexity
-// Worst Case :- O(1)
-
-
-// dequeueHighestPriority()
-// Worst Case :- O(n)
-
-// Space Complexity
-// Worst Case :- O(1)
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -52,7 +5,6 @@ struct pq_element {
     int data;
     int priority;
 };
-
 struct pqueue {
     int front;
     int rear;
@@ -88,6 +40,7 @@ void enqueue(struct pqueue *p, struct pq_element *item) {
         printf("Queue Overflow\n");
         return;
     } else if (isEmpty(p)) {
+
         p->front = p->rear = 0;
     } else {
         p->rear++;
@@ -100,7 +53,6 @@ int *dequeueHighestPriority(struct pqueue *p) {
         printf("Queue Underflow\n");
         return NULL;
     }
-
     for (int i = p->front; i < p->rear + 1; ++i) {
         int j = i - 1;
         struct pq_element temp = p->arr[i];
@@ -110,15 +62,14 @@ int *dequeueHighestPriority(struct pqueue *p) {
         }
         p->arr[j + 1] = temp;
     }
-    int * val;
-    val =  &(p->arr[p->front].data);
-    if(p->front == p->rear){
+    int *val;
+    val = &(p->arr[p->front].data);
+    if (p->front == p->rear) {
         p->front = p->rear = -1;
-    } else{
+    } else {
         p->front++;
     }
     return val;
-
 }
 
 void display(struct pqueue *p) {
@@ -140,7 +91,7 @@ int main() {
     struct pq_element a;
     int *val;
     start:
-    printf("Choose an Operation\n1.Enqueue\n2.DequeueHighestPriority\n3.Display\n4. Exit\n: ");
+    printf("Choose an Operation\n1.Enqueue\n2.DequeueHighestPriority\n3.Display\n4.Exit\n: ");
     scanf("%d", &choose);
     switch (choose) {
         case 1:
@@ -165,6 +116,5 @@ int main() {
             free(queue);
             printf("Exiting....");
             break;
-
     }
 }
