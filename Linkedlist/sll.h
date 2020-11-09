@@ -111,7 +111,6 @@
 // 97.      else
 // 98.          print Index NOT FOUND
 
-
 // 99. deleteWithKey(int key)
 // 100.   prev = HEAD
 // 101.   ptr = HEAD;
@@ -158,6 +157,35 @@
 // 141.   val = ptr->val;
 // 142.   ReturnNode(ptr)
 // 143.   return value
+
+//Result
+//  addAsFirst(val)
+//  Time Complexity :- O(1)
+//  Space Complexity :- O(1)
+//  deleteFirst()
+//  Time Complexity :- O(1)
+//  Space Complexity :- O(1)
+//  addAsLast(int val)
+//  Time Complexity :- O(n)
+//  Space Complexity :- O(1)
+//  deleteLast()
+//  Time Complexity :- O(n)
+//  Space Complexity :- O(1)
+//  print()
+//  Time Complexity :- O(n)
+//  Space Complexity :- O(1)
+//  addWithKey(int val,int key)
+//  Time Complexity :- O(n) (Worst Case)(Depend on Key and if it's not found)
+//  Space Complexity :- O(1)
+//  addWithIndex(int val,int where)
+//  Time Complexity :- O(n) (Worst Case)(Depend on where and if it's not found)
+//  Space Complexity :- O(1)
+//  deleteWithKey(int key)
+//  Time Complexity :- O(n) (Worst Case)(Depend on Key and if it's not found)
+//  Space Complexity :- O(1)
+//  deleteWithIndex(int where)
+//  Time Complexity :- O(n) (Worst Case)(Depend on where and if it's not found)
+//  Space Complexity :- O(1)
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -385,9 +413,9 @@ int deleteWithIndex(struct node **head, int where) {
 }
 
 
-void clearList(struct node *head){
-    struct node * ptr;
-    while (head){
+void clearList(struct node *head) {
+    struct node *ptr;
+    while (head) {
         ptr = head;
         head = head->link;
         free(ptr);
