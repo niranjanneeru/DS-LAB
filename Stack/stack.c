@@ -43,7 +43,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# define MAX 10
+# define MAX 5
 int STACK[MAX];
 int top = -1;
 

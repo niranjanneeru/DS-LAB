@@ -54,7 +54,7 @@ int main() {
         case 2:
             x = pop(&top);
             if (x != NULL) {
-                printf("You chose \"POP\" \nThe element poped out: %d\n", x);
+                printf("You chose \"POP\" \nThe element popped out: %d\n", x);
             }
             goto start;
         case 3:

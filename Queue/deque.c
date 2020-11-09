@@ -74,7 +74,7 @@
 
 struct deque {
     int front;
-    int rear; 
+    int rear;
     int max_size;
     int *queue;
 };

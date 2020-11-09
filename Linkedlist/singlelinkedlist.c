@@ -68,6 +68,7 @@ void main() {
             print(head);
             goto start;
         case 10:
+            clearList(head);
             printf("Exiting...");
             break;
         default:
