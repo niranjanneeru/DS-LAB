@@ -15,7 +15,8 @@ int main() {
     for (; i < strlen(input); ++i) {
         input_with_p[i] = input[i];
     }
-    input_with_p[i] = ')';
+    input_with_p[i++] = ')';
+    input_with_p[i] = '\0';
     result = postfix(input_with_p);
     printf("Expression in PostFix Form: %s\n", result);
     result_with_h = add_symbol(result, '#');

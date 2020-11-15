@@ -18,6 +18,13 @@ int isOperatorEval(char input) {
     return 0;
 }
 
+int isAlpha(char input) {
+    if ((input >= 'A') && (input <= 'Z')) {
+        return 1;
+    }
+    return 0;
+}
+
 int perform_calc(int x1, int x2, char item) {
     switch (item) {
         case '+':
@@ -42,10 +49,17 @@ int evaluate_postfix(char *p) {
         iter++;
         if (isOperandEval(item)) {
             push(&stack_array, item - '0');
+        } else if (isAlpha(item)) {
+            int val;
+            printf("Enter a value for %c: ", item);
+            scanf("%d", &val);
+            push(&stack_array, val);
         } else if (isOperatorEval(item)) {
             int x2 = pop(&stack_array);
             int x1 = pop(&stack_array);
             push(&stack_array, perform_calc(x1, x2, item));
+        } else if (item == '~') {
+            push(&stack_array, -1 * pop(&stack_array));
         } else if (item == '#') {
             return pop(&stack_array);
         } else {

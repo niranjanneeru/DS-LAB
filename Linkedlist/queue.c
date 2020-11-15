@@ -11,7 +11,7 @@
 
 // Start
 // 1. Set up a node for LinkedList and SET FRONT = NULL and REAR = NULL
-
+//
 // 2. Function Enqueue(X)
 // 3. newNode = GetNode(node)
 // 4. if newNode is NULL
@@ -24,7 +24,7 @@
 // 11.  newNode->link = REAR->link
 // 12.  REAR->link = newNode
 // 13.  REAR = REAR->link
-
+//
 // 14. Function Dequeue()
 // 15. Check the Queue is empty (FRONT == NULL)
 // 16. X = FRONT->data
@@ -41,13 +41,13 @@
 // Time Complexity
 // DEQUEUE
 // Worst Case :- O(1)
-
+//
 // Space Complexity
 // O(1)
-
+//
 // ENQUEUE
 // Worst Case :- O(1)
-
+//
 // Space Complexity
 // O(1)
 

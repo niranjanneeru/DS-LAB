@@ -19,8 +19,8 @@
 // 6. newNode->data = X
 // 7. newNode->link = TOP->link
 // 8. TOP->link = newNode
-
-
+//
+//
 // 9. Function POP()
 // 10. Check the STACK is empty (TOP == NULL)
 // 11. X = TOP->data
@@ -37,13 +37,13 @@
 // Time Complexity
 // POP
 // Worst Case :- O(1)
-
+//
 // Space Complexity
 // O(1)
-
+//
 // PUSH
 // Worst Case :- O(1) ;
-
+//
 // Space Complexity
 // O(1)
 

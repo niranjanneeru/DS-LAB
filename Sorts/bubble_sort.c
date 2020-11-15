@@ -16,7 +16,7 @@
 
 // Time Complexity
 // Best Case:- O(n)
-// Avergae Case :- O(n2)
+// Average Case :- O(n2)
 // Worst Case :- O(n2)
 
 // Space Complexity

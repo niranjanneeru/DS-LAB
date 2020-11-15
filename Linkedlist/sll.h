@@ -2,10 +2,11 @@
 
 // Input through functions like addAsFirst(),addAsLast(),addWithKey(),addWithIndex(),deleteFirst(),deleteLast(),deleteWithKey(),deleteWithIndex(),display()
 // Output :- LinkedList after successful operations
-
+//
 // Data Structure Used:- Singly Linked List with a header pointed to the First Node {int data,node link}
 
 // Algorithm
+// Start
 // 1. Create Header pointer (HEAD) and assign it to be NULL
 // 2. addAsFirst(val)
 // 3.  next = GetNode(node)
@@ -15,7 +16,7 @@
 // 7.  next->data = val
 // 8.  next->link = HEAD
 // 9.  HEAD = next
-
+//
 // 10. deleteFirst()
 // 11.  if HEAD = NULL
 // 12.      print LinkedList Underflow
@@ -25,7 +26,7 @@
 // 16.      HEAD = HEAD->link
 // 17.      ReturnNode(ptr)
 // 18.      return val
-
+//
 // 19. addAsLast(int val)
 // 20.  next = GetNode(node)
 // 21.  if next is NULL
@@ -42,7 +43,7 @@
 // 32.    next->data = val
 // 33.    next->link = ptr->link
 // 34.    ptr->link = next
-
+//
 // 35. deleteLast()
 // 36.   prev = NULL
 // 37.   ptr = head;
@@ -60,13 +61,13 @@
 // 49.   val = ptr->val;
 // 50.   ReturnNode(ptr)
 // 51.   return value
-
+//
 // 52. print()
 // 53. ptr = HEAD
 // 54. while(ptr)
 // 55.   print ptr->val
 // 56.   ptr=ptr->link
-
+//
 // 57. addWithKey(int val,int key)
 // 58.  next = GetNode(node)
 // 59.  if next is NULL
@@ -86,7 +87,7 @@
 // 73.          ptr->link = next
 // 74.      else
 // 75.          print KEY NOT FOUND
-
+//
 // 76. addWithIndex(int val,int where)
 // 77.     count = 2
 // 78.     if where < 1 : PRINT Invalid Index;
@@ -110,7 +111,7 @@
 // 96.          ptr->link = next
 // 97.      else
 // 98.          print Index NOT FOUND
-
+//
 // 99. deleteWithKey(int key)
 // 100.   prev = HEAD
 // 101.   ptr = HEAD;
@@ -131,7 +132,7 @@
 // 116.   val = ptr->val;
 // 117.   ReturnNode(ptr)
 // 118.   return value
-
+//
 // 119. deleteWithIndex(int where)
 // 120.   count = 1
 // 121.      if where < 1
@@ -157,6 +158,7 @@
 // 141.   val = ptr->val;
 // 142.   ReturnNode(ptr)
 // 143.   return value
+// Stop
 
 //Result
 //  addAsFirst(val)
