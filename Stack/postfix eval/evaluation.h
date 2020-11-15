@@ -74,7 +74,7 @@ int evaluate_postfix(char *p) {
         } else if (item == '#') {
             return pop(&stack_array);
         } else {
-            printf("%s\n", "Invalid Expression (not in postfix form or may contain alphabets)");
+            printf("%s\n", "Invalid Expression (not in postfix form)");
             return -1;
         }
     }
