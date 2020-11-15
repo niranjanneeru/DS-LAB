@@ -44,22 +44,33 @@ int evaluate_postfix(char *p) {
     struct stack_int stack_array;
     create(&stack_array, strlen(p));
     int iter = 0;
+    int flag = 0;
     while (!(isEmpty(&stack_array)) || iter < (int) strlen(p)) {
         char item = p[iter];
         iter++;
         if (isOperandEval(item)) {
-            push(&stack_array, item - '0');
+            if (flag) {
+                flag = 0;
+                push(&stack_array, '0' - item);
+            } else {
+                push(&stack_array, item - '0');
+            }
         } else if (isAlpha(item)) {
             int val;
             printf("Enter a value for %c: ", item);
             scanf("%d", &val);
-            push(&stack_array, val);
+            if (flag) {
+                flag = 0;
+                push(&stack_array, -1 * val);
+            } else {
+                push(&stack_array, val);
+            }
         } else if (isOperatorEval(item)) {
             int x2 = pop(&stack_array);
             int x1 = pop(&stack_array);
             push(&stack_array, perform_calc(x1, x2, item));
         } else if (item == '~') {
-            push(&stack_array, -1 * pop(&stack_array));
+            flag = 1;
         } else if (item == '#') {
             return pop(&stack_array);
         } else {
