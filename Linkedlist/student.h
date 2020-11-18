@@ -13,6 +13,16 @@ struct student *create() {
     return NULL;
 }
 
+// 1. Create Header pointer (HEAD) and assign it to be NULL
+// 2. addAsFirst(val)
+// 3.  next = GetNode(node)
+// 4.  if next is NULL
+// 5.   print MEMORY UNDERFLOW
+// 6.   return NULL
+// 7.  next->number = number, next->name = name ,next->total_mark = mark
+// 8.  next->link = HEAD
+// 9.  HEAD = next
+
 
 void addAsFirst(struct student **head, int number, char *name, int total_mark) {
     struct student *next = (struct student *) malloc(sizeof(struct student));
@@ -27,6 +37,16 @@ void addAsFirst(struct student **head, int number, char *name, int total_mark) {
     next->total_mark = total_mark;
 }
 
+
+// 10. deleteFirst()
+// 11.  if HEAD = NULL
+// 12.      print LinkedList Underflow
+// 13.  else
+// 14.      val = HEAD->data,name = HEAD->name,total = HEAD->total_mark
+// 15.      ptr = HEAD
+// 16.      HEAD = HEAD->link
+// 17.      ReturnNode(ptr)
+// 18.      return val
 
 struct student *deleteFirst(struct student **head) {
     if (*head == NULL) {
@@ -83,6 +103,10 @@ struct student *deleteLast(struct student **head) {
     return ptr;
 }
 
+// print(head)
+// if(head)
+//      print( head->number, head->name, head->total_mark )
+//      print(head->link)
 
 void print(struct student *head) {
     printf("Student Linked List\n");
@@ -104,11 +128,18 @@ void clearList(struct student *head) {
     }
 }
 
+// searchByStudentNumber(head,id)
+//    while(head && head->number != id)
+//         head = head -> link
+//    if(head->number == number)
+//          return head
+//     return "NotFound"
+
 struct student *searchStudentByNumber(struct student *head, int number) {
     while (head && head->number != number) {
         head = head->link;
     }
-    if (head) {
+    if (head->number == number) {
         return head;
     }
     printf("Record Not Found with number: %d\n", number);
@@ -146,6 +177,30 @@ void singleSwap(struct student *ptr) {
         singleSwap(ptr->link);
     }
 }
+
+// swap(head)
+//     if (ptr == NULL || ptr->link == NULL
+//        return;
+//    if ptr->number <= ptr->link->number)
+//        singleSwap(ptr->link)
+//    else
+//        temp = ptr->number
+//        ptr->number = ptr->link->number
+//        ptr->link->number = temp
+//        temp = ptr->total_mark
+//        ptr->total_mark = ptr->link->total_mark
+//        ptr->link->total_mark = temp
+//        t = ptr->name
+//        ptr->name = ptr->link->name;
+//        ptr->link->name = t
+//        singleSwap(ptr->link);
+//
+// sort(head)
+//    if(head != NULL)
+//          ptr = head
+//          while(ptr->link)
+//              swap(head)
+//              ptr = ptr->link
 
 struct student *sort(struct student *head) {
     if (head == NULL) {
