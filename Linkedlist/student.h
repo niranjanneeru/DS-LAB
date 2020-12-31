@@ -162,7 +162,7 @@ void singleSwap(struct student *ptr) {
     if (ptr == NULL || ptr->link == NULL) {
         return;
     }
-    if (ptr->number <= ptr->link->number) {
+    if (ptr->number =< ptr->link->number) {
         singleSwap(ptr->link);
     } else {
         int temp = ptr->number;

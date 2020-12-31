@@ -30,7 +30,7 @@ int isp(char x) {
         case '+':
         case '-':
             return 2;
-        case '*':
+        case '*':pla
         case '/':
             return 4;
         case '^':

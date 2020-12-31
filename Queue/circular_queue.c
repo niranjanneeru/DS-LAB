@@ -46,79 +46,80 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct queue{
-  int front;
-  int rear;
-  int max_size;
-  int * queue;
+struct queue {
+    int front;
+    int rear;
+    int max_size;
+    int *queue;
 };
 
-int isFull(struct queue *d){
-  if(d->front == (d->rear+1)%d->max_size){
-    return 1;
-  }
-  return 0;
+int isFull(struct queue *d) {
+    if (d->front == (d->rear + 1) % d->max_size) {
+        return 1;
+    }
+    return 0;
 }
 
-int isEmpty(struct queue *d){
-  if(-1 == d->front){
-    return 1;
-  }
-  return 0;
-}
-void create_queue(struct queue *d){
-  printf("Enter the max size of the queue: ");
-  scanf("%d",&d->max_size);
-  d->front = d->rear = -1;
-  d->queue = (int *)malloc(d->max_size * sizeof(int));
+int isEmpty(struct queue *d) {
+    if (-1 == d->front) {
+        return 1;
+    }
+    return 0;
 }
 
-void enqueue(struct queue *d,int item){
-  if(isFull(d)){
-    printf("Queue Overflow\n");
-    return;
-  }
-  if(d->front == -1 && d->rear == -1){
-    d->front = d->rear = 0;
-  }else{
-    d->rear = (d->rear+1)%d->max_size;
-  }
-  d->queue[d->rear]=item;
+void create_queue(struct queue *d) {
+    printf("Enter the max size of the queue: ");
+    scanf("%d", &d->max_size);
+    d->front = d->rear = -1;
+    d->queue = (int *) malloc(d->max_size * sizeof(int));
 }
 
-int dequeue(struct queue *d){
-  if(isEmpty(d)){
-    printf("Queue UnderFlow\n");
-    return NULL;
-  }
-  int item = d->queue[d->front];
-  if(d->front==d->rear){
-    d->front=d->rear=-1;
-  }else{
-    d->front = (d->front+1)%d->max_size;
-  }
-  return item;
+void enqueue(struct queue *d, int item) {
+    if (isFull(d)) {
+        printf("Queue Overflow\n");
+        return;
+    }
+    if (d->front == -1 && d->rear == -1) {
+        d->front = d->rear = 0;
+    } else {
+        d->rear = (d->rear + 1) % d->max_size;
+    }
+    d->queue[d->rear] = item;
 }
 
-void printqueue(struct queue *d){
-  printf("\n");
-  printf("Front :- %d Rear :- %d\n",d->front,d->rear);
-  if(isEmpty(d)){
-    printf("%s\n","Empty Queue");
-    return;
-  }
-  int i = d->front;
-  while(i!=d->rear){
-    printf("%d ",*(d->queue + i));
-    i = (i+1)%d->max_size;
-  }
-  printf("%d\n",*(d->queue+d->rear));
+int dequeue(struct queue *d) {
+    if (isEmpty(d)) {
+        printf("Queue UnderFlow\n");
+        return NULL;
+    }
+    int item = d->queue[d->front];
+    if (d->front == d->rear) {
+        d->front = d->rear = -1;
+    } else {
+        d->front = (d->front + 1) % d->max_size;
+    }
+    return item;
+}
+
+void printqueue(struct queue *d) {
+    printf("\n");
+    printf("Front :- %d Rear :- %d\n", d->front, d->rear);
+    if (isEmpty(d)) {
+        printf("%s\n", "Empty Queue");
+        return;
+    }
+    int i = d->front;
+    while (i != d->rear) {
+        printf("%d ", *(d->queue + i));
+        i = (i + 1) % d->max_size;
+    }
+    printf("%d\n", *(d->queue + d->rear));
 }
 
 
-int main(){
-  struct queue circular_array;
-  create_queue(&circular_array);
+int main() {
+    struct queue circular_array;
+    create_queue(&circular_array);
     int choose;
     int val;
     start:
