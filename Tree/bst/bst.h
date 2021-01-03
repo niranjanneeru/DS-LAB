@@ -126,6 +126,7 @@ node *clear(node *root, int data) {
         } else {
             parent->RTree = NULL;
         }
+        free(ptr);
     } else {
         if (ptr->LTree && ptr->RTree) {
             node *ptr1 = succ(ptr);
@@ -146,6 +147,7 @@ node *clear(node *root, int data) {
                     parent->RTree = ptr->LTree;
                 }
             }
+            free(ptr);
         }
     }
     return root;
@@ -153,7 +155,7 @@ node *clear(node *root, int data) {
 
 
 int num_leaf_nodes(node *root) {
-    if(!root){
+    if (!root) {
         return 0;
     }
     if (!root->LTree && !root->RTree) {

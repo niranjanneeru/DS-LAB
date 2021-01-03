@@ -52,10 +52,10 @@ void insert(node *root, int value, int key) {
         temp->LTree = temp->RTree = NULL;
         if (!pos->LTree) {
             pos->LTree = temp;
-            printf("Insertion Complete to the left of %d",pos->data);
+            printf("Insertion Complete to the left of %d", pos->data);
         } else if (!pos->RTree) {
             pos->RTree = temp;
-            printf("Insertion Complete to the right of %d",pos->data);
+            printf("Insertion Complete to the right of %d", pos->data);
         }
     } else {
         printf("The Element Already have a subtree");
@@ -63,7 +63,7 @@ void insert(node *root, int value, int key) {
 }
 
 node *search_parent(node *root, node *parent, int value) {
-    if(!root){
+    if (!root) {
         return NULL;
     }
     if (root->data != value) {
@@ -78,7 +78,7 @@ node *search_parent(node *root, node *parent, int value) {
     }
 }
 
-void delete(node *root,int value) {
+void remove(node *root, int value) {
     if (!root) {
         printf("Empty Tree");
         return;
@@ -92,16 +92,16 @@ void delete(node *root,int value) {
         if (!pos->LTree->LTree && !pos->LTree->RTree) {
             free(pos->LTree);
             pos->LTree = NULL;
-            printf("Deletion Complete from the left of %d",pos->data);
+            printf("Deletion Complete from the left of %d", pos->data);
         } else {
             printf("Non Leaf Node");
             return;
         }
-    } else if(pos->RTree->data == value){
+    } else if (pos->RTree->data == value) {
         if (!pos->RTree->LTree && !pos->RTree->RTree) {
             free(pos->RTree);
             pos->RTree = NULL;
-    printf("Deletion Complete from the right of %d",pos->data);
+            printf("Deletion Complete from the right of %d", pos->data);
         } else {
             printf("Non Leaf Node");
         }

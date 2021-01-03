@@ -24,7 +24,7 @@ int main() {
         case 2:
             printf("Enter the value to be deleted: ");
             scanf_s("%d", &value);
-            delete(root, value);
+            remove(root, value);
             goto start;
         case 3:
             preorder(root);
