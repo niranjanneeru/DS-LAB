@@ -84,7 +84,7 @@ node *insertInto(node *root, int data) {
 node *succ(node *ptr) {
     node *ptr1 = ptr->RTree;
     if (ptr1) {
-        while (ptr->LTree) {
+        while (ptr1->LTree) {
             ptr1 = ptr1->LTree;
         }
     }
