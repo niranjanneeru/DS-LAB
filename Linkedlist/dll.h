@@ -74,10 +74,11 @@ void addWithIndex(node **head, char data, int where) {
         printf("Memory Underflow\n");
         return;
     }
+    ptr1->data = data;
     ptr1->next = ptr->next;
     ptr1->prev = ptr;
-    ptr1->data = data;
     ptr->next = ptr1;
+    ptr1->next->prev = ptr1;
 }
 
 char deleteFirst(node **head) {
@@ -167,10 +168,11 @@ void clearList(node *head) {
     }
 }
 
+
 void print(node *head) {
     if (head) {
-        printf("%d ", head->data);
-        print(head->prev);
+        printf("%c ", head->data);
+        print(head->next);
     } else {
         printf("\n");
     }
