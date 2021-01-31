@@ -76,6 +76,8 @@ void printqueue(struct queue *d) {
 int main() {
     struct queue que_array;
     create_queue(&que_array);
+    enqueue(&que_array, val);
+    val = dequeue(&que_array);
     int choose;
     int val;
     start:

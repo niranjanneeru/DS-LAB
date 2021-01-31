@@ -78,12 +78,20 @@ node *search_parent(node *root, node *parent, int value) {
     }
 }
 
-void remove(node *root, int value) {
-    if (!root) {
+void remove_node(node **root, int value) {
+    if (!*root) {
         printf("Empty Tree");
         return;
     }
-    node *pos = search_parent(root, NULL, value);
+    if ((*root)->data == value) {
+        if (!(*root)->LTree && !(*root)->RTree) {
+            *root = NULL;
+        } else {
+            printf("Not a Leaf Node");
+            return;
+        }
+    }
+    node *pos = search_parent(*root, NULL, value);
     if (!pos) {
         printf("Element Not in Tree");
         return;

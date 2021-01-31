@@ -130,14 +130,14 @@ int main() {
 void bfs(int v) {
     int u;
     visited[v] = 1;
-    printf("%c ", node_array[v]);
+//    printf("%c ", node_array[v]);
     enqueue(&q, v);
     while (!isEmpty(&q)) {
         u = dequeue(&q);
+        printf("%c ", node_array[u]);
         for (int i = 0; i < n; ++i) {
             if (*(*(adj + u) + i) && !visited[i]) {
                 visited[i] = 1;
-                printf("%c ", node_array[i]);
                 enqueue(&q, i);
             }
         }
@@ -158,14 +158,14 @@ void dfs(int v) {
 void dfs_stack(int v) {
     visited[v] = 1;
     int u;
-    printf("%c ", node_array[v]);
+//    printf("%c ", node_array[v]);
     push(&s, v);
     while (!isStackEmpty(&s)) {
         u = pop(&s);
+        printf("%c ", node_array[u]);
         for (int i = 0; i < n; ++i) {
             if (*(*(adj + u) + i) && !visited[i]) {
                 visited[i] = 1;
-                printf("%c ", node_array[i]);
                 push(&s, i);
             }
         }

@@ -92,6 +92,31 @@ node *succ(node *ptr) {
 }
 
 node *clear(node *root, int data) {
+    if (root->data == data) {
+        if (!root->RTree && !root->LTree) {
+            free(root);
+            return NULL;
+        }
+        if (root->LTree && root->RTree) {
+            int res = succ(root)->data;
+            clear(root, res);
+            root->data = res;
+            return root;
+        }
+        if (root->LTree) {
+            node *ptr = root;
+            root = root->LTree;
+            free(ptr);
+            return root;
+        }
+        if (root->RTree) {
+            node *ptr = root;
+            root = root->RTree;
+            free(ptr);
+            return root;
+        }
+
+    }
     node *ptr = root;
     node *parent = NULL;
     int flag = 1;
@@ -112,11 +137,6 @@ node *clear(node *root, int data) {
     }
     if (flag) {
         printf("No Item");
-        return root;
-    }
-    if (parent == NULL) {
-        empty(root);
-        root = NULL;
         return root;
     }
     if (!ptr->LTree && !ptr->RTree) {
