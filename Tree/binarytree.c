@@ -5,9 +5,10 @@
 
 int main() {
     int choose, value, key;
+    queue *q;
     node *root = NULL;
     start:
-    printf("\nChoose an Operation\n1. Build Tree\n2. Insert into a Tree\n3. Delete into a Tree\n4. PreOrder\n5. InOrder\n6. PostOrder\n7. Exit\n: ");
+    printf("\nChoose an Operation\n1. Build Tree\n2. Insert into a Tree\n3. Delete into a Tree\n4. PreOrder\n5. InOrder\n6. PostOrder\n7. LevelOrder\n8. Number of Nodes\n9. Exit\n: ");
     scanf_s("%d", &choose);
     switch (choose) {
         case 1:
@@ -28,7 +29,7 @@ int main() {
             }
             goto start;
         case 2:
-            if(!root){
+            if (!root) {
                 printf("Empty Tree\n");
                 printf("Perform Build Tree First\n");
                 goto start;
@@ -52,6 +53,14 @@ int main() {
             goto start;
         case 6:
             postorder(root);
+            goto start;
+        case 7:
+            create_queue(q, num_of_nodes(root));
+            getchar();
+            levelorder(root, q);
+            goto start;
+        case 8:
+            printf("Number of Nodes: %d", num_of_nodes(root));
             goto start;
         default:
             printf("Exiting....");
